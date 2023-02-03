@@ -9,6 +9,8 @@ const LOCAL_RPC_URL = process.env.LOCAL_RPC_URL;
 const LOCAL_PRIVATE_KEY = process.env.LOCAL_PRIVATE_KEY;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 const COINMARKETCAP_API_KEY = process.env.COINMARKETCAP_API_KEY;
+const LOCAL2_RPC_URL = process.env.LOCAL2_RPC_URL;
+const LOCAL2_PRIVATE_KEY = process.env.LOCAL2_PRIVATE_KEY;
 
 module.exports = {
     // solidity: "0.8.8",
@@ -22,6 +24,11 @@ module.exports = {
             url: LOCAL_RPC_URL,
             accounts: [LOCAL_PRIVATE_KEY],
             chainId: 1337,
+        },
+        localhost2: {
+            url: LOCAL2_RPC_URL,
+            accounts: [LOCAL2_PRIVATE_KEY],
+            chainId: 31337,
         },
         goerli: {
             url: Goerli_RPC_URL,

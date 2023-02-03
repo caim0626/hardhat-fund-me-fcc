@@ -15,22 +15,23 @@ library PriceConverter {
         (, int256 answer, , , ) = priceFeed.latestRoundData();
 
         // ETH/USD rate in 18 digit
-        return uint256(answer * 10000000000);
+        return uint256(answer * 1e10);
         // or (Both will do the same thing)
         // return uint256(answer * 1e10); // 1* 10 ** 10 == 10000000000
     }
 
     // 1000000000
     function getConversionRate(
+        // 这里传入的eth数量，单位是wei，即eth * 1e18
         uint256 ethAmount,
         AggregatorV3Interface priceFeed
-    ) internal view returns (uint256) {
+    ) internal view returns (uint256, uint256) {
         uint256 ethPrice = getPrice(priceFeed);
 
-        uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1000000000000000000;
+        uint256 ethAmountInUsd = ((ethPrice * ethAmount) / 1e18);
         // or (Both will do the same thing)
         // uint256 ethAmountInUsd = (ethPrice * ethAmount) / 1e18; // 1 * 10 ** 18 == 1000000000000000000
         // the actual ETH/USD conversion rate, after adjusting the extra 0s.
-        return ethAmountInUsd;
+        return (ethPrice, ethAmountInUsd);
     }
 }
